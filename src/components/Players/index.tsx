@@ -1,8 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const Players = () => {
+type Props = {
+  playerName: string,
+  opponentName: string,
+  isOpppentChoise: boolean
+}
+
+const Players = ({playerName, opponentName, isOpppentChoise}:Props) => {
   return (
     <div>
+      <div>
+        Player: {playerName}
+      </div>
+      <div>
+        {opponentName? "Opponent: " + opponentName : "No Opponent"}
+        {isOpppentChoise && " made a choice"}
+      </div>
     </div>
   );
 };
