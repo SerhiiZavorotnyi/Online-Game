@@ -23,9 +23,6 @@ const Result = ({socket,playerName,opponentName}:ResultProps) => {
       
       setTotalGames(totalGames + 1)
 
-      // if (nameOfwinner === null) setNumberOfDraws(numberOfDraws + 1);
-      // else console.log(nameOfwinner === playerName ? "You win" : "You lose");
-
       if(nameOfwinner === null){
         setNumberOfDraws(numberOfDraws + 1);
         setMessage("Its a draw!")

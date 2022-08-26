@@ -38,7 +38,7 @@ const gameResult = (result: Choise[]): string | null => {
     case 0:
       return null;
 
-    default: // -1
+    default: 
       return player2.username;
   }
 }

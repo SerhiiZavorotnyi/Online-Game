@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
-
-import gameResult from "./services/gameResult";
 import SignIn from "./components/SignIn";
 import Buttons from "./components/Buttons";
 import Result from "./components/Result";
@@ -16,10 +14,6 @@ const App = () => {
   const [opponentName, setOpponentName] = useState<string>("");
   const [isOpppentChoise, setIsOpponentChoice] = useState<boolean>(false);
 
-  const [opponentChoice, setOpponentChoice] = useState<string>("bla");
-
-  console.count("app");
-
   useEffect(() => {
     if (!playerName) return;
 
@@ -33,32 +27,22 @@ const App = () => {
 
     socket.on("connected", (playerOpponent: { username: string }) => {
       setOpponentName(playerOpponent.username);
-      console.log("connected: ", playerOpponent);
     });
 
     socket.on("disconnected", (playerOpponent: { username: string }) => {
       setOpponentName("");
-      console.log("disconnected: ", playerOpponent);
     });
 
     socket.on("players_received", (players: string[]) => {
-      console.log("players: ", players);
       setOpponentName(players.filter((name) => name !== playerName)[0]);
     });
 
     socket.on("opponent_made_choice", (playerOpponent: boolean) => {
       setIsOpponentChoice(true);
-      console.log("opponent_made_choice: ", playerOpponent);
     });
 
-    socket.on("game_finished", (game) => {
+    socket.on("game_finished", () => {
       setIsOpponentChoice(false);
-      // const nameOfwinner = gameResult(game.results);
-
-      // if (nameOfwinner === null) console.log("Its a draw");
-      // else console.log(nameOfwinner === playerName ? "You win" : "You lose");
-
-      console.log("finished: ", game);
     });
 
     socket.emit("get_players");
